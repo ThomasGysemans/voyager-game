@@ -30,7 +30,7 @@ func _on_location_entered(area):
 	KnowMoreLabel.visible = true
 	KnowMoreLabel.text = TEXT_KNOW_MORE
 
-func _on_location_exited(area):
+func _on_location_exited(_area):
 	PlanetLabel.text = ""
 	is_near_planet = false
 	DescriptionPanel.visible = false
