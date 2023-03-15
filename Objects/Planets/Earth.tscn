@@ -1,0 +1,63 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Objects/Satellite.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Objects/Satellite.gd" type="Script" id=2]
+[ext_resource path="res://Objects/Planet.gd" type="Script" id=3]
+[ext_resource path="res://assets/Parts/Planets/moon.png" type="Texture" id=4]
+[ext_resource path="res://assets/Parts/Planets/planet03.png" type="Texture" id=5]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 658.57
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 212.002
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 131.015
+
+[node name="Earth" type="StaticBody2D"]
+position = Vector2( 853, 391 )
+collision_layer = 4
+collision_mask = 2
+script = ExtResource( 3 )
+
+[node name="PlanetDetectionArea" type="Area2D" parent="."]
+position = Vector2( 1, -2 )
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlanetDetectionArea"]
+modulate = Color( 0, 1, 0.462745, 1 )
+position = Vector2( 2, 5 )
+shape = SubResource( 2 )
+
+[node name="PlanetSprite" type="Sprite" parent="."]
+scale = Vector2( 0.396094, 0.396094 )
+texture = ExtResource( 5 )
+
+[node name="PlanetShape" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Satellite" parent="." instance=ExtResource( 1 )]
+position = Vector2( 249, -179 )
+rotation = -0.518363
+scale = Vector2( 0.7, 0.7 )
+script = ExtResource( 2 )
+
+[node name="Moon" type="StaticBody2D" parent="."]
+position = Vector2( 731, 286 )
+collision_layer = 4
+collision_mask = 0
+script = ExtResource( 2 )
+speed = 0.1
+offset = 600
+
+[node name="Moon" type="Sprite" parent="Moon"]
+position = Vector2( 1, 2.87256 )
+scale = Vector2( 0.302381, 0.302381 )
+texture = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Moon"]
+position = Vector2( 2, -1.12744 )
+shape = SubResource( 3 )

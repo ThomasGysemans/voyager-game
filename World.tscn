@@ -1,0 +1,404 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://assets/black.png" type="Texture" id=1]
+[ext_resource path="res://Actors/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Objects/Planets/Earth.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Objects/Planets/Mars.tscn" type="PackedScene" id=4]
+[ext_resource path="res://World.gd" type="Script" id=5]
+[ext_resource path="res://Objects/Planets/Sun.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Objects/Planets/Mercury.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Objects/Planets/Venus.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Objects/Asteroid.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Objects/Planets/Jupiter.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Objects/Planets/Saturn.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Objects/Planets/Uranus.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Objects/Planets/Neptune.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Objects/Planets/Pluto.tscn" type="PackedScene" id=14]
+
+[sub_resource type="Theme" id=1]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 19398.4, 97 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 162, 2247.5 )
+
+[node name="World" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="PositionLabel" type="Label" parent="CanvasLayer"]
+margin_left = 24.0
+margin_top = 21.0
+margin_right = 200.0
+margin_bottom = 53.0
+rect_pivot_offset = Vector2( 91, 9 )
+text = "Position : %s, %s"
+
+[node name="PlanetLabel" type="Label" parent="CanvasLayer"]
+margin_left = 24.0
+margin_top = 48.0
+margin_right = 136.0
+margin_bottom = 62.0
+
+[node name="KnowMoreLabel" type="Label" parent="CanvasLayer"]
+visible = false
+margin_left = 24.0
+margin_top = 74.0
+margin_right = 232.0
+margin_bottom = 106.0
+rect_pivot_offset = Vector2( 91, 9 )
+text = "Appuie sur A pour en savoir plus"
+
+[node name="DescriptionPanel" type="Panel" parent="CanvasLayer"]
+visible = false
+margin_left = 23.0
+margin_top = 109.0
+margin_right = 254.0
+margin_bottom = 412.0
+theme = SubResource( 1 )
+
+[node name="DescriptionLabel" type="Label" parent="CanvasLayer/DescriptionPanel"]
+margin_left = 8.0
+margin_top = 11.0
+margin_right = 225.0
+margin_bottom = 220.0
+text = "Ceci est une planète plutôt sympathique si tu veux mon avis"
+autowrap = true
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2( 1024, 600 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
+margin_right = 1024.0
+margin_bottom = 600.0
+texture = ExtResource( 1 )
+stretch_mode = 2
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1730, -729 )
+collision_layer = 2
+collision_mask = 5
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" parent="Player" index="3"]
+position = Vector2( 3, 0 )
+
+[node name="Area2D" parent="Player" index="4"]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+current = true
+limit_left = -2625
+limit_top = -1500
+limit_right = 35000
+limit_bottom = 2800
+
+[node name="Sun" parent="." instance=ExtResource( 6 )]
+
+[node name="Mercury" parent="." instance=ExtResource( 7 )]
+position = Vector2( 2402, 377 )
+
+[node name="Venus" parent="." instance=ExtResource( 8 )]
+position = Vector2( 4967, 344 )
+
+[node name="Mars" parent="." instance=ExtResource( 4 )]
+position = Vector2( 10880, 398 )
+planet_name = 4
+
+[node name="Earth" parent="." instance=ExtResource( 3 )]
+position = Vector2( 7726, 358 )
+
+[node name="Jupiter" parent="." instance=ExtResource( 10 )]
+position = Vector2( 16751, 485 )
+planet_name = 5
+
+[node name="Saturn" parent="." instance=ExtResource( 11 )]
+position = Vector2( 20150, 533 )
+
+[node name="Uranus" parent="." instance=ExtResource( 12 )]
+position = Vector2( 23649, 498 )
+
+[node name="Neptune" parent="." instance=ExtResource( 13 )]
+position = Vector2( 26901, 463 )
+
+[node name="Pluto" parent="." instance=ExtResource( 14 )]
+position = Vector2( 32407, 360 )
+
+[node name="Main belt" type="Node" parent="."]
+
+[node name="Asteroid" parent="Main belt" instance=ExtResource( 9 )]
+position = Vector2( 13353, 364 )
+
+[node name="Asteroid2" parent="Main belt" instance=ExtResource( 9 )]
+position = Vector2( 13206, 55 )
+
+[node name="Asteroid3" parent="Main belt" instance=ExtResource( 9 )]
+position = Vector2( 13596, -82 )
+
+[node name="Asteroid4" parent="Main belt" instance=ExtResource( 9 )]
+position = Vector2( 13921, 199 )
+
+[node name="Asteroid5" parent="Main belt" instance=ExtResource( 9 )]
+position = Vector2( 13884, 664 )
+
+[node name="Asteroid6" parent="Main belt" instance=ExtResource( 9 )]
+position = Vector2( 13581, 995 )
+
+[node name="Asteroid7" parent="Main belt" instance=ExtResource( 9 )]
+position = Vector2( 14415, 1182 )
+
+[node name="Asteroid8" parent="Main belt" instance=ExtResource( 9 )]
+position = Vector2( 14521, 351 )
+
+[node name="Asteroid9" parent="Main belt" instance=ExtResource( 9 )]
+position = Vector2( 14314, -320 )
+
+[node name="Asteroid10" parent="Main belt" instance=ExtResource( 9 )]
+position = Vector2( 13827, -705 )
+
+[node name="Asteroid11" parent="Main belt" instance=ExtResource( 9 )]
+position = Vector2( 13209, -636 )
+
+[node name="Asteroid12" parent="Main belt" instance=ExtResource( 9 )]
+position = Vector2( 12650, -383 )
+
+[node name="Asteroid13" parent="Main belt" instance=ExtResource( 9 )]
+position = Vector2( 12762, 485 )
+
+[node name="Asteroid14" parent="Main belt" instance=ExtResource( 9 )]
+position = Vector2( 12753, 1191 )
+
+[node name="Asteroid15" parent="Main belt" instance=ExtResource( 9 )]
+position = Vector2( 13384, 1788 )
+
+[node name="Asteroid16" parent="Main belt" instance=ExtResource( 9 )]
+position = Vector2( 13974, 2050 )
+
+[node name="Asteroid18" parent="Main belt" instance=ExtResource( 9 )]
+position = Vector2( 15067, 635 )
+
+[node name="Asteroid19" parent="Main belt" instance=ExtResource( 9 )]
+position = Vector2( 14706, 1816 )
+
+[node name="Kuiper" type="Node" parent="."]
+
+[node name="Asteroid17" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 29455, 811 )
+
+[node name="Asteroid20" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 29370, 21 )
+
+[node name="Asteroid21" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 29893, -85 )
+
+[node name="Asteroid22" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 30178, 293 )
+
+[node name="Asteroid23" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 30141, 758 )
+
+[node name="Asteroid24" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 29957, 1363 )
+
+[node name="Asteroid25" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 30760, 865 )
+
+[node name="Asteroid37" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 30610, 1377 )
+
+[node name="Asteroid38" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 30831, 1942 )
+
+[node name="Asteroid39" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 31237, 1558 )
+
+[node name="Asteroid40" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 31374, 1174 )
+
+[node name="Asteroid41" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 31352, 657 )
+
+[node name="Asteroid42" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 31531, 112 )
+
+[node name="Asteroid43" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 31109, -275 )
+
+[node name="Asteroid45" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 31652, -601 )
+
+[node name="Asteroid54" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 32246, -650 )
+
+[node name="Asteroid55" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 32526, -1106 )
+
+[node name="Asteroid57" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 32938, -600 )
+
+[node name="Asteroid75" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 33284, -1232 )
+
+[node name="Asteroid58" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 33974, -1125 )
+
+[node name="Asteroid59" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 31904, 1186 )
+
+[node name="Asteroid60" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 32151, 1692 )
+
+[node name="Asteroid61" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 32854, 1467 )
+
+[node name="Asteroid62" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 33266, 1126 )
+
+[node name="Asteroid63" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 33453, 697 )
+
+[node name="Asteroid64" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 33607, 38 )
+
+[node name="Asteroid65" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 33596, -715 )
+
+[node name="Asteroid66" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 34156, -265 )
+
+[node name="Asteroid67" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 34074, 274 )
+
+[node name="Asteroid68" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 34052, 752 )
+
+[node name="Asteroid69" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 33838, 1219 )
+
+[node name="Asteroid70" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 33624, 1576 )
+
+[node name="Asteroid71" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 33245, 1840 )
+
+[node name="Asteroid72" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 32679, 2214 )
+
+[node name="Asteroid73" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 31283, 2395 )
+
+[node name="Asteroid74" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 31794, 2159 )
+
+[node name="Asteroid56" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 31823, -1051 )
+
+[node name="Asteroid44" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 31209, -770 )
+
+[node name="Asteroid46" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 31087, -1216 )
+
+[node name="Asteroid47" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 30188, -1107 )
+
+[node name="Asteroid48" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 28753, 13 )
+
+[node name="Asteroid49" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 28380, -926 )
+
+[node name="Asteroid50" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 29779, -1231 )
+
+[node name="Asteroid51" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 28589, 1251 )
+
+[node name="Asteroid52" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 28794, -1179 )
+
+[node name="Asteroid53" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 29344, -1062 )
+
+[node name="Asteroid26" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 30800, 184 )
+
+[node name="Asteroid27" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 30404, -342 )
+
+[node name="Asteroid28" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 29926, -619 )
+
+[node name="Asteroid29" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 29304, -547 )
+
+[node name="Asteroid30" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 28669, -417 )
+
+[node name="Asteroid31" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 28794, 464 )
+
+[node name="Asteroid32" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 29134, 1382 )
+
+[node name="Asteroid33" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 29579, 2006 )
+
+[node name="Asteroid34" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 30231, 2144 )
+
+[node name="Asteroid35" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 28583, 2004 )
+
+[node name="Asteroid36" parent="Kuiper" instance=ExtResource( 9 )]
+position = Vector2( 30658, -893 )
+
+[node name="BorderTop" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BorderTop"]
+position = Vector2( 16335.4, -1603 )
+shape = SubResource( 2 )
+
+[node name="BorderBottom" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BorderBottom"]
+position = Vector2( 16763.2, 2868 )
+shape = SubResource( 2 )
+
+[node name="BorderRight" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BorderRight"]
+position = Vector2( 35160, 634 )
+shape = SubResource( 3 )
+
+[node name="BorderLeft" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BorderLeft"]
+position = Vector2( -2784, 710 )
+shape = SubResource( 3 )
+
+[connection signal="area_entered" from="Player/Area2D" to="." method="_on_location_entered"]
+[connection signal="area_exited" from="Player/Area2D" to="." method="_on_location_exited"]
+
+[editable path="Player"]

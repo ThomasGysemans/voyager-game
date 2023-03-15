@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/Parts/Planets/planet06.png" type="Texture" id=1]
+[ext_resource path="res://Objects/Planet.gd" type="Script" id=3]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 658.57
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 192.0
+
+[node name="Pluto" type="StaticBody2D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource( 3 )
+planet_name = 9
+
+[node name="PlanetDetectionArea" type="Area2D" parent="."]
+position = Vector2( 1, -2 )
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlanetDetectionArea"]
+modulate = Color( 0, 1, 0.462745, 1 )
+position = Vector2( 2, 5 )
+shape = SubResource( 2 )
+
+[node name="PlanetSprite" type="Sprite" parent="."]
+scale = Vector2( 0.35, 0.35 )
+texture = ExtResource( 1 )
+
+[node name="PlanetShape" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )

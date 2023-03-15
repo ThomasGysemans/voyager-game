@@ -1,0 +1,72 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assets/PNG/Sprites/Ships/spaceShips_008.png" type="Texture" id=1]
+[ext_resource path="res://Actors/Player.gd" type="Script" id=2]
+[ext_resource path="res://assets/PNG/Sprites/Effects/spaceEffects_003.png" type="Texture" id=3]
+[ext_resource path="res://assets/PNG/Sprites/Effects/spaceEffects_001.png" type="Texture" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 40.875, 29.5 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 4 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "flying",
+"speed": 10.0
+} ]
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 62.0081
+
+[node name="Pos" type="KinematicBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_horizontal_guides_": [  ]
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 1.125, 3 )
+shape = SubResource( 1 )
+
+[node name="ReactorLeft" type="AnimatedSprite" parent="."]
+position = Vector2( -47.1641, -14.2106 )
+rotation = 1.5708
+scale = Vector2( 1.06947, 1.06947 )
+frames = SubResource( 2 )
+animation = "flying"
+offset = Vector2( -0.73812, -0.153473 )
+
+[node name="ReactorRight" type="AnimatedSprite" parent="."]
+position = Vector2( -46, 16 )
+rotation = 1.5708
+scale = Vector2( 1.06947, 1.06947 )
+frames = SubResource( 2 )
+animation = "flying"
+offset = Vector2( -0.73812, -0.153473 )
+
+[node name="Sprite" type="Sprite" parent="."]
+rotation = 1.5708
+texture = ExtResource( 1 )
+flip_v = true
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+modulate = Color( 0, 1, 0.227451, 1 )
+shape = SubResource( 3 )
+
+[node name="GunLeft" type="Position2D" parent="."]
+position = Vector2( 34, -29 )
+
+[node name="GunRight" type="Position2D" parent="."]
+position = Vector2( 33, 28 )
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
